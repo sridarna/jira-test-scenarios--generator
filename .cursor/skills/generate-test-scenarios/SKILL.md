@@ -1,19 +1,34 @@
 ---
 name: generate-test-scenarios
-description: Generate comprehensive test scenarios from Jira epic data. Use when the user asks to generate test scenarios, create test cases, or when working with epic_data.md files.
+description: Generate comprehensive test scenarios from Jira epic data and create Google Doc. Use when the user asks to generate test scenarios, create test cases, or provides a Jira epic URL/key.
 ---
 
 # Generate Test Scenarios from Jira Epic
 
-Generate comprehensive test scenarios from Jira epic data for QA verification.
+Generate comprehensive test scenarios from Jira epic data and output to Google Docs.
 
-## Quick Start
+## Workflow
 
-When the user asks to generate test scenarios:
+When the user provides a Jira epic URL or key:
 
-1. Read the `epic_data.md` file (or specified file)
-2. Generate test scenarios for each user story/task
-3. Save output to `test_scenarios.md`
+1. **Fetch epic data from Jira**
+   ```bash
+   cd jira-test-generator
+   python3 main.py --fetch EPIC-KEY
+   ```
+
+2. **Read the generated `epic_data.md` file**
+
+3. **Generate test scenarios** following the format below
+
+4. **Save to `test_scenarios.md`** in the `jira-test-generator/` folder
+
+5. **Create Google Doc**
+   ```bash
+   python3 main.py --write EPIC-KEY
+   ```
+
+6. **Return the Google Doc link** to the user
 
 ## Test Scenario Format
 
@@ -116,9 +131,22 @@ Screenshots:
 ---
 ```
 
-## After Generation
+## Final Output
 
-Remind the user:
-1. Review and adjust the generated scenarios
-2. Save to `test_scenarios.md` in the `jira-test-generator/` folder
-3. Run `python3 main.py --write EPIC-KEY` to create Google Doc
+After creating the Google Doc, provide the user with:
+
+1. **Google Doc link** (the primary output)
+2. Summary of scenarios generated
+3. Epic key and title
+
+Example response:
+```
+✅ Test scenarios generated and saved to Google Docs!
+
+**Google Doc:** https://docs.google.com/document/d/[doc-id]
+
+**Summary:**
+- Epic: RHOAIENG-70569 - LLM-D Deployment in Wizard
+- Test scenarios: 45
+- Child issues analyzed: 14
+```

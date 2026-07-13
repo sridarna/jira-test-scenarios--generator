@@ -50,6 +50,9 @@ TEST_SCENARIOS_FILE = "test_scenarios.md"
 
 def get_pull_request_from_field(issue) -> str:
     """Extract pull request URL from the custom field."""
+    if not JIRA_PR_FIELD:
+        return ""
+    
     pr_field = getattr(issue.fields, JIRA_PR_FIELD, None)
     
     if pr_field:
