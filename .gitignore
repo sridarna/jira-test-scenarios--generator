@@ -1,0 +1,55 @@
+# Environment and secrets
+.env
+venv/
+.venv/
+env/
+credentials.json
+token.json
+
+# Generated data files
+epic_data.json
+epic_data.md
+test_scenarios.md
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Output
+output/*.docx
+output/*.md
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+
+# OS
+.DS_Store
+Thumbs.db
