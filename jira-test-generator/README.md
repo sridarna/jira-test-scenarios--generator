@@ -98,16 +98,29 @@ python3 main.py --fetch PROJ-12345
 
 ### Step 2: Generate Test Scenarios with Cursor AI
 
+**Option A: Using the Skill (Recommended)**
+
+This repo includes a Cursor Skill that guides the AI agent to generate properly formatted test scenarios.
+
 1. Open `epic_data.md` in Cursor IDE
 2. Open the AI chat (Cmd+L or Ctrl+L)
 3. Ask the agent:
 
    ```
-   Generate test scenarios from this epic data
+   @generate-test-scenarios Generate test scenarios from epic_data.md
    ```
 
-4. The agent generates comprehensive test scenarios
+4. The agent generates comprehensive test scenarios following the correct format
 5. Save the output to `test_scenarios.md`
+
+**Option B: Manual Prompt**
+
+1. Open `epic_data.md` in Cursor IDE
+2. Ask the agent:
+
+   ```
+   Generate test scenarios from this epic data
+   ```
 
 **Tips for better results:**
 - Ask for "at least 2-3 test scenarios per user story"
