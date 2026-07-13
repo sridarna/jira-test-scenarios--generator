@@ -50,7 +50,7 @@ nano .env  # or open in your editor
 |----------|-------------|------------|
 | `JIRA_SERVER` | Your Jira instance URL | e.g., `https://yourcompany.atlassian.net` |
 | `JIRA_EMAIL` | Your Jira account email | Your login email |
-| `JIRA_API_TOKEN` | Jira API token | [Generate here](https://id.atlassian.com/manage-profile/security/api-tokens) |
+| `JIRA_API_TOKEN` | Jira API token | Your Jira API token |
 
 **Optional variables:**
 
@@ -82,84 +82,33 @@ This opens a browser for you to sign in. After success, `token.json` is created.
 
 ## Quick Start Guide
 
-Here's a complete example of generating test scenarios for an epic:
+After setup, open Cursor AI chat and run:
 
-### Step 1: Fetch Epic Data from Jira
-
-```bash
-# Activate virtual environment
-source venv/bin/activate
-
-# Fetch epic data (replace with your epic key)
-python3 main.py --fetch PROJ-12345
+```
+@generate-test-scenarios EPIC-KEY
 ```
 
-**Output:** Creates `epic_data.md` with epic details and all child issues.
+or with a Jira URL:
 
-### Step 2: Generate Test Scenarios with Cursor AI
-
-**Option A: Using the Skill (Recommended)**
-
-This repo includes a Cursor Skill that guides the AI agent to generate properly formatted test scenarios.
-
-1. Open `epic_data.md` in Cursor IDE
-2. Open the AI chat (Cmd+L or Ctrl+L)
-3. Ask the agent:
-
-   ```
-   @generate-test-scenarios Generate test scenarios from epic_data.md
-   ```
-
-4. The agent generates comprehensive test scenarios following the correct format
-5. Save the output to `test_scenarios.md`
-
-**Option B: Manual Prompt**
-
-1. Open `epic_data.md` in Cursor IDE
-2. Ask the agent:
-
-   ```
-   Generate test scenarios from this epic data
-   ```
-
-**Tips for better results:**
-- Ask for "at least 2-3 test scenarios per user story"
-- Request "both positive and negative test cases"
-- Ask to "include edge cases and error handling scenarios"
-
-### Step 3: Create Google Doc
-
-```bash
-python3 main.py --write PROJ-12345
+```
+@generate-test-scenarios https://your-jira.atlassian.net/browse/EPIC-KEY
 ```
 
-**Output:** Creates a formatted Google Doc with:
-- General Information section
-- All test scenarios with headings
-- Hyperlinked PR and Jira ticket references
+The skill automatically fetches Jira data, generates test scenarios, creates a Google Doc, and returns the link.
 
-The Google Doc URL is printed in the terminal.
+## Manual Steps (Alternative)
 
-## Complete Example
+If you prefer manual control over each step:
 
 ```bash
-# 1. Setup (first time only)
-cd jira-test-generator
-python3 -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
-cp .env.example .env
-# Edit .env with your credentials
-python3 auth_setup.py
+# 1. Fetch epic data from Jira
+python3 main.py --fetch EPIC-KEY
 
-# 2. Generate test scenarios for an epic
-python3 main.py --fetch RHOAIENG-12345
+# 2. Open epic_data.md in Cursor, ask AI to generate test scenarios
+# 3. Save output to test_scenarios.md
 
-# 3. Open epic_data.md in Cursor, ask AI to generate test scenarios
-# 4. Save AI output to test_scenarios.md
-
-# 5. Create Google Doc
-python3 main.py --write RHOAIENG-12345
+# 4. Create Google Doc
+python3 main.py --write EPIC-KEY
 ```
 
 ## Test Scenario Format
@@ -224,7 +173,3 @@ Use `pip3` instead of `pip`, or run from within the virtual environment.
 ### "JIRA_SERVER not set" error
 - Make sure you copied `.env.example` to `.env`
 - Verify all required variables are set in `.env`
-
-## License
-
-MIT
